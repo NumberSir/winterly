@@ -42,8 +42,8 @@ jobs:
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
           files: |
-            Merged/${{ steps.props.outputs.mod_id }}-${{ github.event.release.tag_name }}.jar
-            
+            build/libs/merged/${{ steps.props.outputs.mod_id }}-${{ github.event.release.tag_name }}.jar
+
           name: ${{ github.event.release.tag_name }}
           version: ${{ github.event.release.tag_name }}
 
@@ -54,7 +54,7 @@ jobs:
 
           game-versions: ${{ steps.props.outputs.minecraft_version_range_fabric }}
           game-version-filter: releases
-          
+
           dependencies: |
             cloth-config
 
@@ -63,9 +63,9 @@ jobs:
 
           retry-attempts: 0
           fail-mode: skip
-          
+
       - name: Upload assets to GitHub
         uses: AButler/upload-release-assets@v3.0
         with:
-          files: "Merged/${{ steps.props.outputs.mod_id }}-${{ github.event.release.tag_name }}.jar;${{ steps.props.outputs.mod_id }}-fabric/build/libs/${{ steps.props.outputs.mod_id }}-fabric-${{ github.event.release.tag_name }}.jar;${{ steps.props.outputs.mod_id }}-fabric/build/libs/${{ steps.props.outputs.mod_id }}-fabric-${{ github.event.release.tag_name }}-sources.jar;${{ steps.props.outputs.mod_id }}-neoforge/build/libs/${{ steps.props.outputs.mod_id }}-neoforge-${{ github.event.release.tag_name }}.jar;${{ steps.props.outputs.mod_id }}-neoforge/build/libs/${{ steps.props.outputs.mod_id }}-neoforge-${{ github.event.release.tag_name }}-sources.jar"
+          files: "build/libs/merged/${{ steps.props.outputs.mod_id }}-${{ github.event.release.tag_name }}.jar;${{ steps.props.outputs.mod_id }}-fabric/build/libs/${{ steps.props.outputs.mod_id }}-fabric-${{ github.event.release.tag_name }}.jar;${{ steps.props.outputs.mod_id }}-fabric/build/libs/${{ steps.props.outputs.mod_id }}-fabric-${{ github.event.release.tag_name }}-sources.jar;${{ steps.props.outputs.mod_id }}-neoforge/build/libs/${{ steps.props.outputs.mod_id }}-neoforge-${{ github.event.release.tag_name }}.jar;${{ steps.props.outputs.mod_id }}-neoforge/build/libs/${{ steps.props.outputs.mod_id }}-neoforge-${{ github.event.release.tag_name }}-sources.jar"
           repo-token: ${{ secrets.GH_TOKEN }}

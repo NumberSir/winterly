@@ -34,7 +34,7 @@ jobs:
         with:
           name: Artifacts
           path: |
-            Merged/${{ steps.props.outputs.mod_id }}-${{ steps.props.outputs.mod_version }}.jar
+            build/libs/merged/${{ steps.props.outputs.mod_id }}-${{ steps.props.outputs.mod_version }}.jar
             ${{ steps.props.outputs.mod_id }}-fabric/build/libs/${{ steps.props.outputs.mod_id }}-fabric-${{ steps.props.outputs.mod_version }}.jar
             ${{ steps.props.outputs.mod_id }}-fabric/build/libs/${{ steps.props.outputs.mod_id }}-fabric-${{ steps.props.outputs.mod_version }}-sources.jar
             ${{ steps.props.outputs.mod_id }}-neoforge/build/libs/${{ steps.props.outputs.mod_id }}-neoforge-${{ steps.props.outputs.mod_version }}.jar

@@ -1,3 +1,5 @@
+import groovy.lang.Closure
+import io.github.pacifistmc.forgix.plugin.ForgixMergeExtension
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
 
 plugins {
@@ -11,9 +13,22 @@ architectury {
     minecraft = rootProject.property("minecraft_version").toString()
 }
 
+@Suppress("UNCHECKED_CAST")
 forgix {
     group = "ru.pinkgoosik.winterly"
     mergedJarName = "winterly-${rootProject.property("mod_version").toString()}.jar"
+    outputDir = "build/libs/merged"
+
+    fabric(
+            closureOf<ForgixMergeExtension.FabricContainer> {
+                projectName = "winterly-fabric"
+            } as Closure<ForgixMergeExtension.FabricContainer>
+    )
+    neoforge(
+            closureOf<ForgixMergeExtension.NeoForgeContainer> {
+                projectName = "winterly-neoforge"
+            } as Closure<ForgixMergeExtension.NeoForgeContainer>
+    )
 }
 
 subprojects {
