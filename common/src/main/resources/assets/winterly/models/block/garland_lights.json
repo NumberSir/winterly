@@ -1,6 +1,0 @@
-{
-  "parent": "winterly:block/base/garland_lights_model",
-  "textures": {
-    "lights": "winterly:block/garland_lights"
-  }
-}
