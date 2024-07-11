@@ -49,11 +49,11 @@ public class WinterlyFabricClient implements ClientModInitializer {
         map.putBlock(BuiltInRegistries.BLOCK.get(Winterly.id("icicle_bars")), RenderType.cutout());
 
 		if(FabricLoader.getInstance().isModLoaded("trinkets")) {
-			CommonWinterlyItems.ITEMS.forEach((id, item) -> {
-				if(item instanceof CommonScarfItem scarf) {
+			CommonWinterlyItems.ITEMS.forEach((id, sup) -> {
+				if(BuiltInRegistries.ITEM.get(id) instanceof CommonScarfItem scarf) {
 					WinterlyTrinketsIntegration.registerScarfRenderer(scarf);
 				}
-				if(item instanceof CommonSantaHatItem hat) {
+				if(BuiltInRegistries.ITEM.get(id) instanceof CommonSantaHatItem hat) {
 					WinterlyTrinketsIntegration.registerSantaHatRenderer(hat);
 				}
 			});

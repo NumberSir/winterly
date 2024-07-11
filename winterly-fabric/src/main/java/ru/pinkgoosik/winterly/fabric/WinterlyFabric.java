@@ -29,19 +29,19 @@ public class WinterlyFabric implements ModInitializer {
 		WinterlyBlockEntities.init();
         WinterlyFeatures.init();
 
-		if(FabricLoader.getInstance().isModLoaded("owo")) {
-			WinterlyOwoLibIntegration.initItemGroup();
-			ItemGroupEvents.modifyEntriesEvent(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(itemGroup).get()).register(entries -> {
-				CommonWinterlyItems.ITEMS.forEach((id, sup) -> entries.accept(BuiltInRegistries.ITEM.get(id)));
-				CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> entries.accept(BuiltInRegistries.ITEM.get(id)));
-			});
-		}
+//		if(FabricLoader.getInstance().isModLoaded("owo")) {
+//			WinterlyOwoLibIntegration.initItemGroup();
+//			ItemGroupEvents.modifyEntriesEvent(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(itemGroup).get()).register(entries -> {
+//				CommonWinterlyItems.ITEMS.forEach((id, sup) -> entries.accept(BuiltInRegistries.ITEM.get(id)));
+//				CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> entries.accept(BuiltInRegistries.ITEM.get(id)));
+//			});
+//		}
     }
 
     private static CreativeModeTab createItemGroup() {
-		if(FabricLoader.getInstance().isModLoaded("owo")) {
-			return WinterlyOwoLibIntegration.createItemGroup();
-		}
+//		if(FabricLoader.getInstance().isModLoaded("owo")) {
+//			return WinterlyOwoLibIntegration.createItemGroup();
+//		}
         var group = FabricItemGroup.builder().title(Component.translatable("itemGroup.winterly.items"))
 			.icon(() -> BuiltInRegistries.ITEM.get(Winterly.id("snowguy")).getDefaultInstance())
 			.displayItems((displayContext, entries) -> {

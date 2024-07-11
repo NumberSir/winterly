@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.Trinket;
+import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import dev.emi.trinkets.api.client.TrinketRenderer;
 import dev.emi.trinkets.api.client.TrinketRendererRegistry;
@@ -12,14 +13,18 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.client.model.WinterlyModels;
+import ru.pinkgoosik.winterly.fabric.item.SantaHatItem;
 import ru.pinkgoosik.winterly.item.CommonSantaHatItem;
 import ru.pinkgoosik.winterly.item.CommonScarfItem;
+
+import java.util.Optional;
 
 public class WinterlyTrinketsIntegration {
 
@@ -28,12 +33,12 @@ public class WinterlyTrinketsIntegration {
 	}
 
 	public static boolean hasHatOn(Player player) {
-//		Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-//		if(component.isPresent()) {
-//			for(Tuple<SlotReference, ItemStack> pair : component.get().getAllEquipped()) {
-//				if(pair.getB().getItem() instanceof SantaHatItem) return true;
-//			}
-//		}
+		Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
+		if(component.isPresent()) {
+			for(Tuple<SlotReference, ItemStack> pair : component.get().getAllEquipped()) {
+				if(pair.getB().getItem() instanceof SantaHatItem) return true;
+			}
+		}
 		return false;
 	}
 

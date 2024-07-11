@@ -37,7 +37,8 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric_loader_version")}")
     modApi("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric_api_version")}")
 
-	modCompileOnly("dev.emi:trinkets:${rootProject.property("trinkets_version")}")
+//	modLocalRuntime("dev.emi:trinkets:${rootProject.property("trinkets_version")}")
+	modApi(files("trinkets-3.10.0.jar"))
 	modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${rootProject.property("cca_version")}")
 
     modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${rootProject.property("cca_version")}")

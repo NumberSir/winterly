@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import org.ladysnake.cca.api.v3.component.ComponentV3;
 import ru.pinkgoosik.winterly.data.CachedFlowers;
 
+@SuppressWarnings("NullableProblems")
 public class WorldData implements ComponentV3 {
 
 	public Level world;
