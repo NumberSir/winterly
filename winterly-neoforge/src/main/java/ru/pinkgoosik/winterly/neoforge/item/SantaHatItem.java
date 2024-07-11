@@ -13,6 +13,7 @@ import ru.pinkgoosik.winterly.item.CommonSantaHatItem;
 
 import java.util.List;
 
+@SuppressWarnings("NullableProblems")
 public class SantaHatItem extends CommonSantaHatItem {
 
     public SantaHatItem(Item.Properties settings, String color) {

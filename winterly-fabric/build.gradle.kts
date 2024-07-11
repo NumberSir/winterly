@@ -37,9 +37,6 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric_loader_version")}")
     modApi("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric_api_version")}")
 
-    // Remove the next line if you don't want to depend on the API
-    //modApi("dev.architectury:architectury-fabric:${rootProject.property("architectury_version")}")
-
 	modCompileOnly("dev.emi:trinkets:${rootProject.property("trinkets_version")}")
 	modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${rootProject.property("cca_version")}")
 
@@ -48,12 +45,12 @@ dependencies {
 	modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${rootProject.property("cca_version")}")
     include("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${rootProject.property("cca_version")}")
 
-	modCompileOnly("io.wispforest:owo-lib:${rootProject.property("owo_lib")}")
+    modApi("io.wispforest:owo-lib:${rootProject.property("owo_lib")}")
 	modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.property("cloth_config")}") { exclude("net.fabricmc.fabric-api") }
 	modApi("com.terraformersmc:modmenu:${rootProject.property("modmenu_version")}")
 
 	//modLocalRuntime "maven.modrinth:here-be-no-dragons:1.0.0"
-	//modLocalRuntime "dev.emi:emi-fabric:1.0.29+1.20.4"
+	modLocalRuntime("dev.emi:emi-fabric:1.1.10+1.21")
 
     common(project(":winterly-common", configuration = "namedElements")) { isTransitive = false }
     shadowCommon(project(":winterly-common", configuration = "transformProductionFabric")) { isTransitive = false }

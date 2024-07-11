@@ -11,6 +11,11 @@
   "tip.winterly.requires_curios.0": "Для ношения требуется",
   "tip.winterly.requires_curios.1": "установка мода Curios API.",
 
+  "tag.item.winterly.candy_canes": "Candy Canes",
+  "tag.item.winterly.scarfs": "Scarfs",
+  "tag.block.winterly.gift_boxes": "Gift Boxes",
+  "tag.enchantment.winterly.gift_box_pickup": "Gift Box Pickup",
+
   "item.winterly.red_candy_cane": "Красный леденец",
   "item.winterly.green_candy_cane": "Зеленый леденец",
   "item.winterly.blue_candy_cane": "Синий леденец",

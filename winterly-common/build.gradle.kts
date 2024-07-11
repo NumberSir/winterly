@@ -12,7 +12,4 @@ dependencies {
     // Do NOT use other classes from fabric loader
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric_loader_version")}")
 	modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${rootProject.property("cloth_config")}") { exclude("net.fabricmc.fabric-api") }
-
-    // Remove the next line if you don't want to depend on the API
-    //modApi("dev.architectury:architectury:${rootProject.property("architectury_version")}")
 }

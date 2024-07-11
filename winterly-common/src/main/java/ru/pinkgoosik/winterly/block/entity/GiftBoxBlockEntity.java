@@ -27,13 +27,13 @@ public class GiftBoxBlockEntity extends BlockEntity implements GiftBoxBlockEntit
     @Override
     public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-		tag.put("giftBoxData", GiftBoxData.toNbt(this));
+		tag.put("giftBoxData", GiftBoxData.toNbt(this, registries));
     }
 
 	@Override
 	public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		super.loadAdditional(tag, registries);
-		var data = GiftBoxData.fromNbt(tag.getCompound("giftBoxData"));
+		var data = GiftBoxData.fromNbt(tag.getCompound("giftBoxData"), registries);
 		this.stacks = data.stacks;
 	}
 

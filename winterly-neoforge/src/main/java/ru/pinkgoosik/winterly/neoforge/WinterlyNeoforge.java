@@ -1,19 +1,16 @@
 package ru.pinkgoosik.winterly.neoforge;
 
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import ru.pinkgoosik.winterly.neoforge.client.WinterlyNeoforgeClient;
 import ru.pinkgoosik.winterly.neoforge.data.WinterlyDataAttachments;
@@ -38,26 +35,11 @@ public class WinterlyNeoforge {
 		bus.addListener(this::register);
         bus.addListener(this::buildCreativeTab);
 		bus.addListener(this::commonSetup);
-		bus.addListener(this::modifyComponents);
 
 		if(FMLEnvironment.dist.isClient()) {
 			WinterlyNeoforgeClient.init(bus);
 		}
     }
-
-	// Listened to on the mod event bus
-	public void modifyComponents(ModifyDefaultComponentsEvent event) {
-		// Sets the component on melon seeds
-//		event.modify(Items.MELON_SEEDS, builder ->
-//			builder.set(DataComponents.CAN_BREAK)
-//		);
-
-		// Removes the component for any items that have a crafting item
-		event.modifyMatching(
-			item -> item.hasCraftingRemainingItem(),
-			builder -> builder.remove(DataComponents.BUCKET_ENTITY_DATA)
-		);
-	}
 
 	public void register(RegisterEvent event) {
 		WinterlyItems.init();
@@ -67,21 +49,10 @@ public class WinterlyNeoforge {
 			registry.register(Winterly.id("items"), CreativeModeTab.builder().icon(BuiltInRegistries.ITEM.get(Winterly.id("snowguy"))::getDefaultInstance).title(Component.translatable("itemGroup.winterly.items")).build());
 		});
 
-		event.register(Registries.ITEM, registry -> {
-			ITEMS.forEach((id, sup) -> registry.register(id, sup.get()));
-		});
-
-		event.register(Registries.BLOCK, registry -> {
-			CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> registry.register(id, sup.get()));
-		});
-
-		event.register(Registries.ITEM, registry -> {
-			CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> registry.register(id, new BlockItem(BuiltInRegistries.BLOCK.get(id), new Item.Properties())));
-		});
-
-		event.register(Registries.BLOCK_ENTITY_TYPE, registry -> {
-			WinterlyBlockEntities.init(registry);
-		});
+		event.register(Registries.ITEM, registry -> ITEMS.forEach((id, sup) -> registry.register(id, sup.get())));
+		event.register(Registries.BLOCK, registry -> CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> registry.register(id, sup.get())));
+		event.register(Registries.ITEM, registry -> CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> registry.register(id, new BlockItem(BuiltInRegistries.BLOCK.get(id), new Item.Properties()))));
+		event.register(Registries.BLOCK_ENTITY_TYPE, WinterlyBlockEntities::init);
 	}
 
     private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {

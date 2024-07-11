@@ -26,19 +26,19 @@ configurations {
 repositories {
   maven { url = uri("https://maven.theillusivec4.top/") }
   maven { url = uri("https://maven.shedaniel.me/") }
+  maven { url = uri("https://maven.terraformersmc.com") }
 }
 
 dependencies {
     neoForge("net.neoforged:neoforge:${rootProject.property("neoforge_version")}")
-
-    // Remove the next line if you don't want to depend on the API
-    //modApi("dev.architectury:architectury-fabric:${rootProject.property("architectury_version")}")
 
 	modCompileOnly("top.theillusivec4.curios:curios-neoforge:${rootProject.property("curios_version")}:api")
     // Use the full Curios API jar at runtime
     modCompileOnly("top.theillusivec4.curios:curios-neoforge:${rootProject.property("curios_version")}")
 
 	modApi("me.shedaniel.cloth:cloth-config-neoforge:${rootProject.property("cloth_config")}")
+
+    modLocalRuntime("dev.emi:emi-neoforge:1.1.10+1.21")
 
     common(project(":winterly-common", configuration = "namedElements")) { isTransitive = false }
     shadowCommon(project(":winterly-common", configuration = "transformProductionNeoForge")) { isTransitive = false }
