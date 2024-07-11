@@ -3,6 +3,7 @@ package ru.pinkgoosik.winterly.mixin.common;
 import com.mojang.serialization.MapCodec;
 import it.unimi.dsi.fastutil.objects.Reference2ObjectArrayMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -15,8 +16,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.block.CommonFrozenFlowerBlock;
-import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
 
 @Mixin(BlockBehaviour.BlockStateBase.class)
 public abstract class BlockStateMixin extends StateHolder<Block, BlockState> {
@@ -34,7 +35,7 @@ public abstract class BlockStateMixin extends StateHolder<Block, BlockState> {
 
 	@Inject(method = "getDestroySpeed", at = @At("HEAD"), cancellable = true)
 	void getHardness(BlockGetter world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
-		if(is(CommonWinterlyBlocks.FROZEN_FLOWER)) {
+		if(is(BuiltInRegistries.BLOCK.get(Winterly.id("frozen_flower")))) {
 			if(getValue(CommonFrozenFlowerBlock.LAYERS) == 0) {
 				cir.setReturnValue(0.0F);
 			}
@@ -46,7 +47,7 @@ public abstract class BlockStateMixin extends StateHolder<Block, BlockState> {
 
 	@Inject(method = "requiresCorrectToolForDrops", at = @At("HEAD"), cancellable = true)
 	void isToolRequired(CallbackInfoReturnable<Boolean> cir) {
-		if(is(CommonWinterlyBlocks.FROZEN_FLOWER)) {
+		if(is(BuiltInRegistries.BLOCK.get(Winterly.id("frozen_flower")))) {
 			if(getValue(CommonFrozenFlowerBlock.LAYERS) == 0) {
 				cir.setReturnValue(false);
 			}

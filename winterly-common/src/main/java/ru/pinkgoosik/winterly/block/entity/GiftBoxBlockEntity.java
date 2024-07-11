@@ -1,8 +1,9 @@
 package ru.pinkgoosik.winterly.block.entity;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.data.GiftBoxData;
-import ru.pinkgoosik.winterly.registry.CommonWinterlyBlockEntities;
 
 import java.util.ArrayList;
 import net.minecraft.core.BlockPos;
@@ -15,7 +16,7 @@ public class GiftBoxBlockEntity extends BlockEntity implements GiftBoxBlockEntit
     public ArrayList<ItemStack> stacks = new ArrayList<>();
 
     public GiftBoxBlockEntity(BlockPos pos, BlockState state) {
-        super(CommonWinterlyBlockEntities.GIFT_BOX_BLOCK_ENTITY, pos, state);
+        super(BuiltInRegistries.BLOCK_ENTITY_TYPE.get(Winterly.id("gift_box")), pos, state);
     }
 
     @Override

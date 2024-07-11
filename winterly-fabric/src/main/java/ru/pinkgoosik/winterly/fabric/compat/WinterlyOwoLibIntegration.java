@@ -3,17 +3,17 @@ package ru.pinkgoosik.winterly.fabric.compat;
 import io.wispforest.owo.itemgroup.Icon;
 import io.wispforest.owo.itemgroup.OwoItemGroup;
 import io.wispforest.owo.itemgroup.gui.ItemGroupButton;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import ru.pinkgoosik.winterly.fabric.WinterlyFabric;
 import ru.pinkgoosik.winterly.Winterly;
-import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
 
 public class WinterlyOwoLibIntegration {
 	public static final ResourceLocation ICONS_TEXTURE = Winterly.id("textures/gui/icons.png");
 
 	public static CreativeModeTab createItemGroup() {
-		return OwoItemGroup.builder(Winterly.id("items"), () -> Icon.of(CommonWinterlyBlocks.SNOWGUY))
+		return OwoItemGroup.builder(Winterly.id("items"), () -> Icon.of(BuiltInRegistries.ITEM.get(Winterly.id("snowguy"))))
 				.initializer(group -> {
 					group.addButton(ItemGroupButton.link(group, Icon.of(ICONS_TEXTURE, 0, 0, 64, 64), "discord", "https://discord.gg/DcemWeskeZ"));
 //					if(UpdateChecker.check()) {

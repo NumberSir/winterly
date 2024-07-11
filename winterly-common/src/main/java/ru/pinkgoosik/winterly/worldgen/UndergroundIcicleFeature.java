@@ -1,13 +1,13 @@
 package ru.pinkgoosik.winterly.worldgen;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import ru.pinkgoosik.winterly.Winterly;
-import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
 
 public class UndergroundIcicleFeature extends Feature<NoneFeatureConfiguration> {
 
@@ -32,7 +32,7 @@ public class UndergroundIcicleFeature extends Feature<NoneFeatureConfiguration> 
                     if(context.random().nextInt(4) == 0) {
                         if(world.isEmptyBlock(pos)) {
                             if(isStone(world.getBlockState(pos.above()))) {
-                                world.setBlock(pos, CommonWinterlyBlocks.ICICLE.defaultBlockState(), Block.UPDATE_ALL);
+                                world.setBlock(pos, BuiltInRegistries.BLOCK.get(Winterly.id("icicle")).defaultBlockState(), Block.UPDATE_ALL);
                                 generated = true;
                             }
                         }

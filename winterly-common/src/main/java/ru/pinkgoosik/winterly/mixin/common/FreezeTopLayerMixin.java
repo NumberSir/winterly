@@ -1,6 +1,7 @@
 package ru.pinkgoosik.winterly.mixin.common;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.WorldGenLevel;
@@ -16,7 +17,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.block.CommonFrozenFlowerBlock;
-import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
 
 @Mixin(SnowAndFreezeFeature.class)
 public abstract class FreezeTopLayerMixin {
@@ -29,7 +29,7 @@ public abstract class FreezeTopLayerMixin {
 			if(view instanceof WorldGenLevel world) {
 
 				if (Winterly.config.generateFrozenGrass && (state.is(Blocks.SHORT_GRASS) || state.is(Blocks.FERN) || state.is(Blocks.LARGE_FERN) || state.is(Blocks.TALL_GRASS))) {
-					world.setBlock(pos, CommonWinterlyBlocks.FROZEN_GRASS.defaultBlockState(), 3);
+					world.setBlock(pos, BuiltInRegistries.BLOCK.get(Winterly.id("frozen_grass")).defaultBlockState(), 3);
 					BlockState floor = world.getBlockState(pos.below());
 					if (floor.hasProperty(SnowyDirtBlock.SNOWY)) {
 						world.setBlock(pos.below(), floor.setValue(SnowyDirtBlock.SNOWY, Boolean.TRUE), 2);
@@ -40,7 +40,7 @@ public abstract class FreezeTopLayerMixin {
 					return false;
 				}
 				else if(Winterly.config.generateFrozenFlowers && (state.getBlock() instanceof FlowerBlock || state.getBlock() instanceof TallFlowerBlock)) {
-					world.setBlock(pos, CommonWinterlyBlocks.FROZEN_FLOWER.defaultBlockState().setValue(CommonFrozenFlowerBlock.LAYERS, 1), 3);
+					world.setBlock(pos, BuiltInRegistries.BLOCK.get(Winterly.id("frozen_flower")).defaultBlockState().setValue(CommonFrozenFlowerBlock.LAYERS, 1), 3);
 					BlockState floor = world.getBlockState(pos.below());
 					if (floor.hasProperty(SnowyDirtBlock.SNOWY)) {
 						world.setBlock(pos.below(), floor.setValue(SnowyDirtBlock.SNOWY, Boolean.TRUE), 2);

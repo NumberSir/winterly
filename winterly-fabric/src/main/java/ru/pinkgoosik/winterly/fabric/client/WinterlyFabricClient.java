@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.DrownedRenderer;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.ZombieRenderer;
+import net.minecraft.core.registries.BuiltInRegistries;
+import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.fabric.compat.WinterlyTrinketsIntegration;
 import ru.pinkgoosik.winterly.block.*;
 import ru.pinkgoosik.winterly.client.WinterlyModelLayers;
@@ -32,7 +34,9 @@ public class WinterlyFabricClient implements ClientModInitializer {
         MobDecorationRenderers.init();
 
         BlockRenderLayerMap map = BlockRenderLayerMap.INSTANCE;
-        CommonWinterlyBlocks.BLOCKS.forEach((id, block) -> {
+        CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> {
+			var block = BuiltInRegistries.BLOCK.get(id);
+
 			if(block instanceof GiftBoxBlock) map.putBlock(block, RenderType.cutout());
             if(block instanceof GarlandLightsBlock) map.putBlock(block, RenderType.cutout());
             if(block instanceof SnowguyBlock) map.putBlock(block, RenderType.cutout());
@@ -40,9 +44,9 @@ public class WinterlyFabricClient implements ClientModInitializer {
 			if(block instanceof CommonFrozenGrassBlock) map.putBlock(block, RenderType.cutout());
 			if(block instanceof CommonFrozenFlowerBlock) map.putBlock(block, RenderType.cutout());
         });
-        map.putBlock(CommonWinterlyBlocks.ICICLE_BLOCK, RenderType.translucent());
-        map.putBlock(CommonWinterlyBlocks.ICICLE_PANE, RenderType.translucent());
-        map.putBlock(CommonWinterlyBlocks.ICICLE_BARS, RenderType.cutout());
+        map.putBlock(BuiltInRegistries.BLOCK.get(Winterly.id("icicle_block")), RenderType.translucent());
+        map.putBlock(BuiltInRegistries.BLOCK.get(Winterly.id("icicle_pane")), RenderType.translucent());
+        map.putBlock(BuiltInRegistries.BLOCK.get(Winterly.id("icicle_bars")), RenderType.cutout());
 
 		if(FabricLoader.getInstance().isModLoaded("trinkets")) {
 			CommonWinterlyItems.ITEMS.forEach((id, item) -> {

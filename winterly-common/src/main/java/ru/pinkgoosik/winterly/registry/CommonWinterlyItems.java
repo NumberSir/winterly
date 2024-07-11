@@ -1,39 +1,42 @@
 package ru.pinkgoosik.winterly.registry;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tiers;
+import ru.pinkgoosik.winterly.Winterly;
+import ru.pinkgoosik.winterly.item.tool.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class CommonWinterlyItems {
-    public static final Map<ResourceLocation, Item> ITEMS = new LinkedHashMap<>();
+    public static final Map<ResourceLocation, Supplier<Item>> ITEMS = new LinkedHashMap<>();
 
-    public static Item RED_CANDY_CANE;
-    public static Item GREEN_CANDY_CANE;
-    public static Item BLUE_CANDY_CANE;
+	public static void init() {
+		add("red_candy_cane", () -> new Item(settings().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).fast().build())));
+	    add("green_candy_cane", () -> new Item(settings().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).fast().build())));
+		add("blue_candy_cane", () -> new Item(settings().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).fast().build())));
 
-    public static Item CRYOMARBLE_SHARD;
-    public static Item CRYOMARBLE;
+		add("cryomarble_shard", () -> new Item(settings()));
+		add("cryomarble", () -> new Item(settings()));
 
-    public static Item CRYOMARBLE_SWORD;
-    public static Item CRYOMARBLE_SHOVEL;
-    public static Item CRYOMARBLE_PICKAXE;
-    public static Item CRYOMARBLE_AXE;
-    public static Item CRYOMARBLE_HOE;
+		add("cryomarble_sword", () -> new CryomarbleSwordItem(Tiers.DIAMOND, settings()));
+		add("cryomarble_shovel", () -> new CryomarbleShovelItem(Tiers.DIAMOND, settings()));
+	    add("cryomarble_pickaxe", () -> new CryomarblePickaxeItem(Tiers.DIAMOND, settings()));
 
-    public static Item RED_SANTA_HAT;
-    public static Item BLUE_SANTA_HAT;
-
-    public static Item WHITE_SCARF;
-    public static Item RED_SCARF;
-    public static Item GREEN_SCARF;
-    public static Item BLUE_SCARF;
-    public static Item RAINBOW_SCARF;
+		add("cryomarble_axe", () -> new CryomarbleAxeItem(Tiers.DIAMOND, settings()));
+		add("cryomarble_hoe", () -> new CryomarbleHoeItem(Tiers.DIAMOND, settings()));
+	}
 
 	public static Item.Properties settings() {
 		return new Item.Properties();
+	}
+
+	public static void add(String name, Supplier<Item> item) {
+		ITEMS.put(Winterly.id(name), item);
 	}
 }
 

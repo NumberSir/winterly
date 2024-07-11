@@ -2,6 +2,7 @@ package ru.pinkgoosik.winterly.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -23,8 +24,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.data.CachedFlowers;
-import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
 
 import java.util.Objects;
 
@@ -161,7 +162,7 @@ public class CommonFrozenFlowerBlock extends Block {
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
 		BlockState state = ctx.getLevel().getBlockState(ctx.getClickedPos());
-		if(state.is(Blocks.SNOW) || state.is(CommonWinterlyBlocks.FROZEN_GRASS)) {
+		if(state.is(Blocks.SNOW) || state.is(BuiltInRegistries.BLOCK.get(Winterly.id("frozen_grass")))) {
 			return defaultBlockState().setValue(LAYERS, 1).setValue(PERSISTENT, true);
 		}
 		else {

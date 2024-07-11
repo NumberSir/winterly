@@ -1,14 +1,20 @@
 package ru.pinkgoosik.winterly.neoforge;
 
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import ru.pinkgoosik.winterly.neoforge.client.WinterlyNeoforgeClient;
 import ru.pinkgoosik.winterly.neoforge.data.WinterlyDataAttachments;
 import ru.pinkgoosik.winterly.neoforge.registry.WinterlyBlockEntities;
@@ -19,36 +25,69 @@ import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
 import ru.pinkgoosik.winterly.registry.CommonWinterlyItems;
 
-import java.util.function.Supplier;
+import static ru.pinkgoosik.winterly.registry.CommonWinterlyItems.ITEMS;
 
 @SuppressWarnings("unused")
 @Mod(Winterly.MOD_ID)
 public class WinterlyNeoforge {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "winterly");
-
-    public static final Supplier<CreativeModeTab> WINTERLY_TAB = CREATIVE_MODE_TABS.register("winterly", () -> CreativeModeTab.builder().icon(CommonWinterlyBlocks.SNOWGUY.asItem()::getDefaultInstance).title(Component.translatable("itemGroup.winterly.items")).build());
 
     public WinterlyNeoforge(IEventBus bus) {
-        CREATIVE_MODE_TABS.register(bus);
-
-        WinterlyItems.init(bus);
-        WinterlyBlocks.init(bus);
-        WinterlyBlockEntities.init(bus);
         WinterlyFeatures.init(bus);
         WinterlyDataAttachments.init(bus);
 
+		bus.addListener(this::register);
         bus.addListener(this::buildCreativeTab);
 		bus.addListener(this::commonSetup);
+		bus.addListener(this::modifyComponents);
 
 		if(FMLEnvironment.dist.isClient()) {
 			WinterlyNeoforgeClient.init(bus);
 		}
     }
 
+	// Listened to on the mod event bus
+	public void modifyComponents(ModifyDefaultComponentsEvent event) {
+		// Sets the component on melon seeds
+//		event.modify(Items.MELON_SEEDS, builder ->
+//			builder.set(DataComponents.CAN_BREAK)
+//		);
+
+		// Removes the component for any items that have a crafting item
+		event.modifyMatching(
+			item -> item.hasCraftingRemainingItem(),
+			builder -> builder.remove(DataComponents.BUCKET_ENTITY_DATA)
+		);
+	}
+
+	public void register(RegisterEvent event) {
+		WinterlyItems.init();
+		WinterlyBlocks.init();
+
+		event.register(Registries.CREATIVE_MODE_TAB, registry -> {
+			registry.register(Winterly.id("items"), CreativeModeTab.builder().icon(BuiltInRegistries.ITEM.get(Winterly.id("snowguy"))::getDefaultInstance).title(Component.translatable("itemGroup.winterly.items")).build());
+		});
+
+		event.register(Registries.ITEM, registry -> {
+			ITEMS.forEach((id, sup) -> registry.register(id, sup.get()));
+		});
+
+		event.register(Registries.BLOCK, registry -> {
+			CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> registry.register(id, sup.get()));
+		});
+
+		event.register(Registries.ITEM, registry -> {
+			CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> registry.register(id, new BlockItem(BuiltInRegistries.BLOCK.get(id), new Item.Properties())));
+		});
+
+		event.register(Registries.BLOCK_ENTITY_TYPE, registry -> {
+			WinterlyBlockEntities.init(registry);
+		});
+	}
+
     private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTab() == WINTERLY_TAB.get()) {
-            CommonWinterlyItems.ITEMS.forEach((id, item) -> event.accept(item));
-            CommonWinterlyBlocks.ITEMS.forEach((id, item) -> event.accept(item));
+        if (event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(Winterly.id("items"))) {
+            CommonWinterlyItems.ITEMS.forEach((id, sup) -> event.accept(BuiltInRegistries.ITEM.get(id)));
+            CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> event.accept(BuiltInRegistries.ITEM.get(id)));
         }
     }
 

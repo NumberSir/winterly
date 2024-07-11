@@ -2,35 +2,26 @@ package ru.pinkgoosik.winterly.neoforge.registry;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.RegisterEvent;
+import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.block.GiftBoxBlock;
 import ru.pinkgoosik.winterly.block.entity.GiftBoxBlockEntity;
 import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
 
 import java.util.ArrayList;
 
-import static ru.pinkgoosik.winterly.registry.CommonWinterlyBlockEntities.GIFT_BOX_BLOCK_ENTITY;
 
 public class WinterlyBlockEntities {
-	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES_REGISTERER = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, "winterly");
 
-	public static void init(IEventBus eventBus) {
-
-		BLOCK_ENTITIES_REGISTERER.register("gift_box", () -> {
-			var type = BlockEntityType.Builder.of(GiftBoxBlockEntity::new, getGiftBoxes()).build(null);
-			GIFT_BOX_BLOCK_ENTITY = type;
-			return type;
-		});
-
-		BLOCK_ENTITIES_REGISTERER.register(eventBus);
+	public static void init(RegisterEvent.RegisterHelper<BlockEntityType<?>> registry) {
+		registry.register(Winterly.id("gift_box"), BlockEntityType.Builder.of(GiftBoxBlockEntity::new, getGiftBoxes()).build(null));
 	}
 
 	public static GiftBoxBlock[] getGiftBoxes() {
 		ArrayList<GiftBoxBlock> gifts = new ArrayList<>();
 
-		CommonWinterlyBlocks.BLOCKS.forEach((identifier, block) -> {
-			if(block instanceof GiftBoxBlock box) {
+		CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> {
+			if(BuiltInRegistries.BLOCK.get(id) instanceof GiftBoxBlock box) {
 				gifts.add(box);
 			}
 		});

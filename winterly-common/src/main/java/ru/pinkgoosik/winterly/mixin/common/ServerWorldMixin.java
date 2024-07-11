@@ -1,6 +1,7 @@
 package ru.pinkgoosik.winterly.mixin.common;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -15,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.block.CommonFrozenFlowerBlock;
 import ru.pinkgoosik.winterly.data.CachedFlowers;
-import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
 
 @Mixin(ServerLevel.class)
 public abstract class ServerWorldMixin {
@@ -27,11 +27,11 @@ public abstract class ServerWorldMixin {
 			BlockState state = view.getBlockState(pos);
 			if(view instanceof Level world) {
 				if (state.is(Blocks.SHORT_GRASS) && Winterly.config.generateFrozenGrass) {
-					world.setBlockAndUpdate(pos, CommonWinterlyBlocks.FROZEN_GRASS.defaultBlockState());
+					world.setBlockAndUpdate(pos, BuiltInRegistries.BLOCK.get(Winterly.id("frozen_grass")).defaultBlockState());
 					return false;
 				}
 				else if(state.getBlock() instanceof FlowerBlock && Winterly.config.generateFrozenFlowers) {
-					world.setBlockAndUpdate(pos, CommonWinterlyBlocks.FROZEN_FLOWER.defaultBlockState().setValue(CommonFrozenFlowerBlock.LAYERS, 1));
+					world.setBlockAndUpdate(pos, BuiltInRegistries.BLOCK.get(Winterly.id("frozen_flower")).defaultBlockState().setValue(CommonFrozenFlowerBlock.LAYERS, 1));
 					CachedFlowers.cacheFlower(((Level) view), pos, state.getBlock());
 					return false;
 				}

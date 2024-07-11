@@ -3,6 +3,7 @@ package ru.pinkgoosik.winterly.block;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +27,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
+import ru.pinkgoosik.winterly.Winterly;
 
 import java.util.List;
 
@@ -111,7 +112,7 @@ public class IcicleBlock extends Block implements SimpleWaterloggedBlock {
 
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
-		if(this.equals(CommonWinterlyBlocks.ICICLE)) {
+		if(this.equals(BuiltInRegistries.BLOCK.get(Winterly.id("icicle")))) {
 			tooltip.add(Component.translatable("tag.winterly.placeable").withStyle(ChatFormatting.GRAY));
 		}
 		super.appendHoverText(stack, context, tooltip, tooltipFlag);

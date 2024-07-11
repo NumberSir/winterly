@@ -31,7 +31,7 @@ public abstract class ZombieExtension extends Monster implements DecoratedMob {
     }
 
     @Override
-    public boolean winterly$decorated() {
+    public boolean winterly$isDecorated() {
         return getEntityData().get(winterly$DECORATED);
     }
 
@@ -39,6 +39,12 @@ public abstract class ZombieExtension extends Monster implements DecoratedMob {
     public int winterly$getIndex() {
         return getEntityData().get(winterly$INDEX);
     }
+
+	@Override
+	public void winterly$setDecoration(int index) {
+		getEntityData().set(winterly$DECORATED, true);
+		getEntityData().set(winterly$INDEX, index);
+	}
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     void initData(SynchedEntityData.Builder builder, CallbackInfo ci) {
@@ -65,8 +71,7 @@ public abstract class ZombieExtension extends Monster implements DecoratedMob {
                 if(!this.level().dimension().equals(Level.NETHER)) {
                     int chance = Winterly.config.mobDecorations.chance;
                     if(chance > 0 && Math.random() < (double)chance / 100) {
-                        getEntityData().set(winterly$DECORATED, true);
-                        getEntityData().set(winterly$INDEX, level.getRandom().nextInt(5));
+						this.winterly$setDecoration(level.getRandom().nextInt(5));
                     }
                 }
 

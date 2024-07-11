@@ -2,6 +2,7 @@ package ru.pinkgoosik.winterly.worldgen;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -9,7 +10,6 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.block.IcicleBlock;
-import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
 
 public class CryomarbleFeature extends Feature<NoneFeatureConfiguration> {
 
@@ -44,7 +44,7 @@ public class CryomarbleFeature extends Feature<NoneFeatureConfiguration> {
                     if(context.random().nextInt(Math.abs(x) + Math.abs(y) + Math.abs(z) + 1) == 0) {
                         if(world.isEmptyBlock(pos) && isStone(world.getBlockState(pos.below()))) {
                             if(spawned < 3) {
-                                world.setBlock(pos, CommonWinterlyBlocks.RAW_CRYOMARBLE_SHARD.defaultBlockState().setValue(IcicleBlock.FACING, Direction.UP), Block.UPDATE_ALL);
+                                world.setBlock(pos, BuiltInRegistries.BLOCK.get(Winterly.id("raw_cryomarble_shard")).defaultBlockState().setValue(IcicleBlock.FACING, Direction.UP), Block.UPDATE_ALL);
                                 spawned++;
                             }else return true;
                         }

@@ -15,10 +15,10 @@ public class CommonSantaHatItem extends Item {
         this.color = color;
     }
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
-		tooltip.add(Component.translatable("tag.winterly.cosmetic").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.nullToEmpty(" "));
-		super.appendHoverText(stack, context, tooltip, tooltipFlag);
-	}
+//	@Override
+//	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
+//		tooltip.add(Component.translatable("tag.winterly.cosmetic").withStyle(ChatFormatting.GRAY));
+//		tooltip.add(Component.nullToEmpty(" "));
+//		super.appendHoverText(stack, context, tooltip, tooltipFlag);
+//	}
 }
