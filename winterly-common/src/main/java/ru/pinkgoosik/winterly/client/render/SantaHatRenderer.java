@@ -11,10 +11,11 @@ import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.client.model.WinterlyModels;
 
 public class SantaHatRenderer extends MobDecorationRenderer {
+	public final String texture;
 
-    public SantaHatRenderer(String texture) {
-        super(texture);
-    }
+	public SantaHatRenderer(String texture) {
+		this.texture = texture;
+	}
 
     @Override
     public void render(HumanoidModel<?> contextModel, PoseStack matrices, MultiBufferSource vertexConsumers, int light, LivingEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {

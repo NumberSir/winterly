@@ -18,7 +18,7 @@ public class DecorationFeatureRenderer<T extends LivingEntity, M extends Humanoi
     public void render(PoseStack matrices, MultiBufferSource vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if(entity instanceof DecoratedMob decorated) {
             if(decorated.winterly$isDecorated()) {
-                MobDecorationRenderer renderer = MobDecorationRenderers.getRenderer(decorated.winterly$getIndex());
+                MobDecorationRenderer renderer = MobDecorations.getRenderer(decorated.winterly$getIndex());
                 renderer.render(this.getParentModel(), matrices, vertexConsumers, light, entity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);
             }
         }

@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import ru.pinkgoosik.winterly.Winterly;
+import ru.pinkgoosik.winterly.client.render.MobDecorations;
 import ru.pinkgoosik.winterly.extension.DecoratedMob;
 import ru.pinkgoosik.winterly.util.HolidayUtils;
 
@@ -33,7 +34,7 @@ abstract class AbstractSkeletonMixin extends Monster implements RangedAttackMob 
 				if(!this.level().dimension().equals(Level.NETHER)) {
 					int chance = Winterly.config.mobDecorations.chance;
 					if(chance > 0 && Math.random() < (double)chance / 100) {
-						decorated.winterly$setDecoration(level.getRandom().nextInt(5));
+						decorated.winterly$setDecoration(level.getRandom().nextInt(MobDecorations.LIST.size()));
 					}
 				}
 			}

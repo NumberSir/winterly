@@ -11,9 +11,10 @@ import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.client.model.WinterlyModels;
 
 public class ScarfRenderer extends MobDecorationRenderer {
+	public final String texture;
 
     public ScarfRenderer(String texture) {
-        super(texture);
+		this.texture = texture;
     }
 
     @Override

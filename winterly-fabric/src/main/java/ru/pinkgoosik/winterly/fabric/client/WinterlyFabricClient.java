@@ -16,7 +16,7 @@ import ru.pinkgoosik.winterly.client.WinterlyModelLayers;
 import ru.pinkgoosik.winterly.client.model.SantaHatModel;
 import ru.pinkgoosik.winterly.client.model.ScarfModel;
 import ru.pinkgoosik.winterly.client.render.DecorationFeatureRenderer;
-import ru.pinkgoosik.winterly.client.render.MobDecorationRenderers;
+import ru.pinkgoosik.winterly.client.render.MobDecorations;
 import ru.pinkgoosik.winterly.item.CommonSantaHatItem;
 import ru.pinkgoosik.winterly.item.CommonScarfItem;
 import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
@@ -31,7 +31,7 @@ public class WinterlyFabricClient implements ClientModInitializer {
         registerModelLayer(WinterlyModelLayers.SANTA_HAT_LAYER, SantaHatModel::getTexturedModelData);
         registerModelLayer(WinterlyModelLayers.SCARF_LAYER, ScarfModel::getTexturedModelData);
 
-        MobDecorationRenderers.init();
+        MobDecorations.init();
 
         BlockRenderLayerMap map = BlockRenderLayerMap.INSTANCE;
         CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> {
