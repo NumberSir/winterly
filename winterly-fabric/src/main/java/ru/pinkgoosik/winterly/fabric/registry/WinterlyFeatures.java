@@ -2,13 +2,11 @@ package ru.pinkgoosik.winterly.fabric.registry;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -37,14 +35,13 @@ public class WinterlyFeatures {
 		BiomeModifications.create(Winterly.id("features"))
 				.add(ModificationPhase.ADDITIONS, ctx -> {
 					var entry = ctx.getBiomeRegistryEntry();
-					var coldTag = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("c", "climate_cold"));
-					return !entry.is(BiomeTags.IS_NETHER) && !entry.is(BiomeTags.IS_END) && entry.is(coldTag);
+					return !entry.is(ConventionalBiomeTags.IS_NETHER) && !entry.is(ConventionalBiomeTags.IS_END) && entry.is(ConventionalBiomeTags.IS_COLD_OVERWORLD);
 				}, ctx -> {
 					ctx.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, UNDERGROUND_ICICLE_PLACED);
 				})
 				.add(ModificationPhase.ADDITIONS, ctx -> {
 					var entry = ctx.getBiomeRegistryEntry();
-					return !entry.is(BiomeTags.IS_NETHER) && !entry.is(BiomeTags.IS_END);
+					return !entry.is(ConventionalBiomeTags.IS_NETHER) && !entry.is(ConventionalBiomeTags.IS_END);
 				}, ctx -> {
 					ctx.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, CRYOMARBLE_PLACED);
 				});
