@@ -69,3 +69,10 @@ jobs:
         with:
           files: "build/libs/merged/${{ steps.props.outputs.mod_id }}-${{ github.event.release.tag_name }}.jar;${{ steps.props.outputs.mod_id }}-fabric/build/libs/${{ steps.props.outputs.mod_id }}-fabric-${{ github.event.release.tag_name }}.jar;${{ steps.props.outputs.mod_id }}-fabric/build/libs/${{ steps.props.outputs.mod_id }}-fabric-${{ github.event.release.tag_name }}-sources.jar;${{ steps.props.outputs.mod_id }}-neoforge/build/libs/${{ steps.props.outputs.mod_id }}-neoforge-${{ github.event.release.tag_name }}.jar;${{ steps.props.outputs.mod_id }}-neoforge/build/libs/${{ steps.props.outputs.mod_id }}-neoforge-${{ github.event.release.tag_name }}-sources.jar"
           repo-token: ${{ secrets.GH_TOKEN }}
+
+      - name: Hit mod update webhook
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.MOD_UPDATE_WEBHOOK }}
+          method: 'GET'
+          preventFailureOnNoResponse: 'true'
