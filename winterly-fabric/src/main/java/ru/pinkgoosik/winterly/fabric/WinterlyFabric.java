@@ -2,14 +2,12 @@ package ru.pinkgoosik.winterly.fabric;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import ru.pinkgoosik.winterly.Winterly;
-import ru.pinkgoosik.winterly.fabric.compat.WinterlyOwoLibIntegration;
+import ru.pinkgoosik.winterly.fabric.data.WinterlyAttachedData;
 import ru.pinkgoosik.winterly.fabric.registry.WinterlyBlockEntities;
 import ru.pinkgoosik.winterly.fabric.registry.WinterlyBlocks;
 import ru.pinkgoosik.winterly.registry.CommonWinterlyBlocks;
@@ -28,6 +26,7 @@ public class WinterlyFabric implements ModInitializer {
 		WinterlyBlocks.init();
 		WinterlyBlockEntities.init();
         WinterlyFeatures.init();
+		WinterlyAttachedData.init();
 
 //		if(FabricLoader.getInstance().isModLoaded("owo")) {
 //			WinterlyOwoLibIntegration.initItemGroup();

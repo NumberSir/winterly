@@ -3,37 +3,30 @@ package ru.pinkgoosik.winterly.neoforge.data;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import org.jetbrains.annotations.Nullable;
 import ru.pinkgoosik.winterly.Winterly;
 import ru.pinkgoosik.winterly.data.CachedFlowers;
 
-import java.util.function.Supplier;
-
 public class WinterlyDataAttachments {
-    private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Winterly.MOD_ID);
+    private static AttachmentType<ChunkData> CHUNK_DATA;
 
-    private static final Supplier<AttachmentType<WorldData>> WORLD_DATA = ATTACHMENT_TYPES.register(
-            "world_data", () -> AttachmentType.builder(WorldData::new).serialize(new WorldData.WorldDataIAttachmentSerializer()).build()
-    );
+    public static void init(RegisterEvent.RegisterHelper<AttachmentType<?>> registry) {
+		CHUNK_DATA = AttachmentType.builder(ChunkData::new).serialize(new ChunkData.ChunkDataIAttachmentSerializer()).build();
 
-    public static void init(IEventBus eventBus) {
+		registry.register(Winterly.id("chunk_data"), CHUNK_DATA);
 
         CachedFlowers.instance = new CachedFlowers() {
             @Override
             public @Nullable Block getFlowerImpl(Level world, BlockPos pos) {
-                return world.getData(WORLD_DATA).cachedFlowers.get(pos);
+                return world.getChunkAt(pos).getData(CHUNK_DATA).cachedFlowers.get(pos);
             }
 
             @Override
             public void cacheFlowerImpl(Level world, BlockPos pos, Block flower) {
-                world.getData(WORLD_DATA).cachedFlowers.put(pos, flower);
+                world.getChunkAt(pos).getData(CHUNK_DATA).cachedFlowers.put(pos, flower);
             }
         };
-
-        ATTACHMENT_TYPES.register(eventBus);
     }
 }

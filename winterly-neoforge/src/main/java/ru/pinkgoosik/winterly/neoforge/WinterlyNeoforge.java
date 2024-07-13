@@ -11,6 +11,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import ru.pinkgoosik.winterly.neoforge.client.WinterlyNeoforgeClient;
 import ru.pinkgoosik.winterly.neoforge.data.WinterlyDataAttachments;
@@ -29,9 +30,6 @@ import static ru.pinkgoosik.winterly.registry.CommonWinterlyItems.ITEMS;
 public class WinterlyNeoforge {
 
     public WinterlyNeoforge(IEventBus bus) {
-        WinterlyFeatures.init(bus);
-        WinterlyDataAttachments.init(bus);
-
 		bus.addListener(this::register);
         bus.addListener(this::buildCreativeTab);
 		bus.addListener(this::commonSetup);
@@ -49,6 +47,8 @@ public class WinterlyNeoforge {
 			registry.register(Winterly.id("items"), CreativeModeTab.builder().icon(BuiltInRegistries.ITEM.get(Winterly.id("snowguy"))::getDefaultInstance).title(Component.translatable("itemGroup.winterly.items")).build());
 		});
 
+		event.register(Registries.FEATURE, WinterlyFeatures::init);
+		event.register(NeoForgeRegistries.ATTACHMENT_TYPES.key(), WinterlyDataAttachments::init);
 		event.register(Registries.ITEM, registry -> ITEMS.forEach((id, sup) -> registry.register(id, sup.get())));
 		event.register(Registries.BLOCK, registry -> CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> registry.register(id, sup.get())));
 		event.register(Registries.ITEM, registry -> CommonWinterlyBlocks.BLOCKS.forEach((id, sup) -> registry.register(id, new BlockItem(BuiltInRegistries.BLOCK.get(id), new Item.Properties()))));

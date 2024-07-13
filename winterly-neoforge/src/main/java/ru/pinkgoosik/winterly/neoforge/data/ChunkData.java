@@ -14,14 +14,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @SuppressWarnings("NullableProblems")
-public class WorldData {
+public class ChunkData {
     public Map<BlockPos, Block> cachedFlowers = new LinkedHashMap<>();
 
-    public static class WorldDataIAttachmentSerializer implements IAttachmentSerializer<Tag, WorldData> {
+    public static class ChunkDataIAttachmentSerializer implements IAttachmentSerializer<Tag, ChunkData> {
 
         @Override
-        public WorldData read(IAttachmentHolder holder, Tag tag, HolderLookup.Provider lookup) {
-            WorldData data = new WorldData();
+        public ChunkData read(IAttachmentHolder holder, Tag tag, HolderLookup.Provider lookup) {
+            ChunkData data = new ChunkData();
 
             var cachedFlowersNbt = ((CompoundTag) tag).getCompound("cachedFlowers");
 
@@ -40,7 +40,7 @@ public class WorldData {
         }
 
         @Override
-        public Tag write(WorldData data, HolderLookup.Provider lookup) {
+        public Tag write(ChunkData data, HolderLookup.Provider lookup) {
             CompoundTag cachedFlowersNbt = new CompoundTag();
             cachedFlowersNbt.putInt("size", data.cachedFlowers.size());
             int index = -1;

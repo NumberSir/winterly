@@ -23,9 +23,6 @@
     "client": [
       "ru.pinkgoosik.winterly.fabric.client.WinterlyFabricClient"
     ],
-    "cardinal-components": [
-      "ru.pinkgoosik.winterly.fabric.data.WinterlyComponents"
-    ],
     "modmenu": [
       "ru.pinkgoosik.winterly.fabric.compat.WinterlyModMenuIntegration"
     ]
@@ -41,10 +38,7 @@
         "modmenu.curseforge": "https://curseforge.com/minecraft/mc-mods/winterly",
         "modmenu.modrinth": "https://modrinth.com/mod/winterly"
       }
-    },
-    "cardinal-components": [
-      "winterly:world_data"
-    ]
+    }
   },
   "depends": {
     "fabricloader": "*",

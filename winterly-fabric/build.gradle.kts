@@ -40,11 +40,7 @@ dependencies {
 //	modLocalRuntime("dev.emi:trinkets:${rootProject.property("trinkets_version")}")
 	modApi(files("trinkets-3.10.0.jar"))
 	modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${rootProject.property("cca_version")}")
-
     modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${rootProject.property("cca_version")}")
-    include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${rootProject.property("cca_version")}")
-	modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${rootProject.property("cca_version")}")
-    include("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${rootProject.property("cca_version")}")
 
     modApi("io.wispforest:owo-lib:${rootProject.property("owo_lib")}")
 	modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.property("cloth_config")}") { exclude("net.fabricmc.fabric-api") }
