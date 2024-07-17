@@ -3,6 +3,7 @@ package ru.pinkgoosik.winterly.neoforge.client;
 import net.minecraft.client.renderer.entity.DrownedRenderer;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.ZombieRenderer;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -52,9 +53,9 @@ public class WinterlyNeoforgeClient {
 
 	private static void clientSetup(FMLClientSetupEvent event) {
 		if(ModList.get().isLoaded("curios")) {
-			CommonWinterlyItems.ITEMS.forEach((resourceLocation, item) -> {
-				if(item instanceof CommonScarfItem scarf) WinterlyCuriosIntegration.registerScarfRenderer(scarf);
-				if(item instanceof CommonSantaHatItem hat) WinterlyCuriosIntegration.registerSantaHatRenderer(hat);
+			CommonWinterlyItems.ITEMS.forEach((id, sup) -> {
+				if(BuiltInRegistries.ITEM.get(id) instanceof CommonScarfItem scarf) WinterlyCuriosIntegration.registerScarfRenderer(scarf);
+				if(BuiltInRegistries.ITEM.get(id) instanceof CommonSantaHatItem hat) WinterlyCuriosIntegration.registerSantaHatRenderer(hat);
 			});
 		}
 

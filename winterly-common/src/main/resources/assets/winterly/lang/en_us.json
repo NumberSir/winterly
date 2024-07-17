@@ -68,9 +68,6 @@
   "block.winterly.cyan_gift_box": "Cyan Gift Box",
   "block.winterly.orange_gift_box": "Orange Gift Box",
 
-  "tag.winterly.placeable": "Placeable",
-  "tag.winterly.cosmetic": "Cosmetic",
-
   "config.winterly.title": "Winterly Config",
   "config.winterly.general": "General",
   "config.winterly.option.max_gift_box_capacity": "Max Gift Box Capacity",

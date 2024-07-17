@@ -13,6 +13,7 @@ import ru.pinkgoosik.winterly.item.CommonScarfItem;
 
 import java.util.List;
 
+@SuppressWarnings("NullableProblems")
 public class ScarfItem extends CommonScarfItem {
 
     public ScarfItem(Item.Properties settings, String color) {
@@ -24,8 +25,6 @@ public class ScarfItem extends CommonScarfItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
-		tooltip.add(Component.translatable("tag.winterly.cosmetic").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.nullToEmpty(" "));
 
 		if(!FabricLoader.getInstance().isModLoaded("trinkets")) {
 			Language lang = Language.getInstance();
@@ -33,7 +32,7 @@ public class ScarfItem extends CommonScarfItem {
 
 			for(int i = 0; i <= 32; i++) {
 				if(lang.has(key + i)) {
-					tooltip.add(Component.translatable(key + i).toFlatList(Style.EMPTY.withColor(ChatFormatting.GRAY)).get(0));
+					tooltip.add(Component.translatable(key + i).toFlatList(Style.EMPTY.withColor(ChatFormatting.GRAY)).getFirst());
 				}
 				if(!lang.has(key + (i + 1))) {
 					break;

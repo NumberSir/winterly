@@ -1,12 +1,7 @@
 package ru.pinkgoosik.winterly.block;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -15,8 +10,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import java.util.List;
 
 @SuppressWarnings("NullableProblems")
 public class SnowguyBlock extends HorizontalDirectionalBlock {
@@ -45,10 +38,4 @@ public class SnowguyBlock extends HorizontalDirectionalBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
-
-	@Override
-	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
-		tooltip.add(Component.translatable("tag.winterly.placeable").withStyle(ChatFormatting.GRAY));
-		super.appendHoverText(stack, context, tooltip, tooltipFlag);
-	}
 }

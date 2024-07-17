@@ -68,9 +68,6 @@
   "block.winterly.cyan_gift_box": "Cyan Gift Box",
   "block.winterly.orange_gift_box": "Orange Gift Box",
 
-  "tag.winterly.placeable": "可放置的",
-  "tag.winterly.cosmetic": "装饰品",
-
   "config.winterly.title": "Winterly配置",
   "config.winterly.general": "常规",
   "config.winterly.option.max_gift_box_capacity": "Max Gift Box Capacity",

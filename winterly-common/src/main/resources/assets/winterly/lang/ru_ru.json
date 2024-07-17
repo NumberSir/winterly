@@ -68,9 +68,6 @@
   "block.winterly.cyan_gift_box": "Бирюзовая подарочная коробка",
   "block.winterly.orange_gift_box": "Оранжевая подарочная коробка",
 
-  "tag.winterly.placeable": "Размещаемый предмет",
-  "tag.winterly.cosmetic": "Косметический предмет",
-
   "config.winterly.title": "Настройки Winterly",
   "config.winterly.general": "Общее",
   "config.winterly.option.max_gift_box_capacity": "Максимальная вместимость подарочной коробки",
