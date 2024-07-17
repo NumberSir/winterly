@@ -13,6 +13,7 @@ import ru.pinkgoosik.winterly.item.CommonScarfItem;
 
 import java.util.List;
 
+@SuppressWarnings("NullableProblems")
 public class ScarfItem extends CommonScarfItem {
 
     public ScarfItem(Item.Properties settings, String color) {
@@ -26,8 +27,6 @@ public class ScarfItem extends CommonScarfItem {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
 		if(!ModList.get().isLoaded("curios")) {
-			tooltip.add(Component.translatable("tag.winterly.cosmetic").withStyle(ChatFormatting.GRAY));
-			tooltip.add(Component.nullToEmpty(" "));
 			Language lang = Language.getInstance();
 			String key = "tip.winterly.requires_curios.";
 
@@ -39,10 +38,6 @@ public class ScarfItem extends CommonScarfItem {
 					break;
 				}
 			}
-		}
-		else {
-			tooltip.add(Component.nullToEmpty(" "));
-			tooltip.add(Component.translatable("tag.winterly.cosmetic").withStyle(ChatFormatting.GRAY));
 		}
     }
 }

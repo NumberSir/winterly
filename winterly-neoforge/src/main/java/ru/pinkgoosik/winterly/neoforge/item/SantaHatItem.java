@@ -27,8 +27,6 @@ public class SantaHatItem extends CommonSantaHatItem {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
 		if(!ModList.get().isLoaded("curios")) {
-			tooltip.add(Component.translatable("tag.winterly.cosmetic").withStyle(ChatFormatting.GRAY));
-			tooltip.add(Component.nullToEmpty(" "));
 			Language lang = Language.getInstance();
 			String key = "tip.winterly.requires_curios.";
 
@@ -40,10 +38,6 @@ public class SantaHatItem extends CommonSantaHatItem {
 					break;
 				}
 			}
-		}
-		else {
-			tooltip.add(Component.nullToEmpty(" "));
-			tooltip.add(Component.translatable("tag.winterly.cosmetic").withStyle(ChatFormatting.GRAY));
 		}
 	}
 

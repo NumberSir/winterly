@@ -37,17 +37,12 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric_loader_version")}")
     modApi("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric_api_version")}")
 
-//	modLocalRuntime("dev.emi:trinkets:${rootProject.property("trinkets_version")}")
-	modApi(files("trinkets-3.10.0.jar"))
-	modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${rootProject.property("cca_version")}")
-    modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${rootProject.property("cca_version")}")
-
+	modApi("dev.emi:trinkets:${rootProject.property("trinkets_version")}")
     modApi("io.wispforest:owo-lib:${rootProject.property("owo_lib")}")
 	modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.property("cloth_config")}") { exclude("net.fabricmc.fabric-api") }
 	modApi("com.terraformersmc:modmenu:${rootProject.property("modmenu_version")}")
 
-	//modLocalRuntime "maven.modrinth:here-be-no-dragons:1.0.0"
-	modLocalRuntime("dev.emi:emi-fabric:1.1.10+1.21")
+	modLocalRuntime("dev.emi:emi-fabric:${rootProject.property("emi_version")}")
 
     common(project(":winterly-common", configuration = "namedElements")) { isTransitive = false }
     shadowCommon(project(":winterly-common", configuration = "transformProductionFabric")) { isTransitive = false }

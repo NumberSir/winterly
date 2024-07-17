@@ -24,31 +24,22 @@ configurations {
 }
 
 repositories {
-//    maven("https://maven.theillusivec4.top/")
     maven("https://maven.shedaniel.me/")
     maven("https://maven.terraformersmc.com")
-
     maven("https://maven.wispforest.io/releases")
     maven("https://maven.su5ed.dev/releases")
     maven("https://maven.fabricmc.net")
-
     maven("https://maven.octo-studios.com/releases")
 }
 
 dependencies {
     neoForge("net.neoforged:neoforge:${rootProject.property("neoforge_version")}")
 
-	//modCompileOnly("top.theillusivec4.curios:curios-neoforge:${rootProject.property("curios_version")}:api")
-    // Use the full Curios API jar at runtime
-    //modCompileOnly("top.theillusivec4.curios:curios-neoforge:${rootProject.property("curios_version")}")
-
     modApi("top.theillusivec4.curios:curios-neoforge:${rootProject.property("curios_kirill")}")
-
 	modApi("me.shedaniel.cloth:cloth-config-neoforge:${rootProject.property("cloth_config")}")
+//	modApi("io.wispforest:accessories-neoforge:${rootProject.property("accessories")}")
 
-//	implementation("io.wispforest:accessories-neoforge:${rootProject.property("accessories")}")
-
-    modLocalRuntime("dev.emi:emi-neoforge:1.1.10+1.21")
+    modLocalRuntime("dev.emi:emi-neoforge:${rootProject.property("emi_version")}")
 
     common(project(":winterly-common", configuration = "namedElements")) { isTransitive = false }
     shadowCommon(project(":winterly-common", configuration = "transformProductionNeoForge")) { isTransitive = false }
