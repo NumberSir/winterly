@@ -57,6 +57,8 @@ jobs:
 
           dependencies: |
             cloth-config
+            curios-continuation(optional)
+            trinkets(optional)
 
           java: |
             21
